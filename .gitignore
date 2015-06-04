@@ -2,3 +2,15 @@
 /config/app.php
 /tmp/*
 /logs/*
+/webroot/
+/tests/
+/plugins/
+/bin/
+/config/
+phpunit.xml.dist
+.travis.yml
+.editorconfig
+.htaccess
+.gitattributes
+composer.phar
+composer.lock
