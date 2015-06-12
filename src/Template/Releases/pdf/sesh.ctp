@@ -1,4 +1,4 @@
-<!-- File: src/Template/Releases/sesh.ctp-->
+<!-- File: src/Template/Releases/pdf/sesh.ctp-->
 <!--<p><?=$this->Html->link('Back Home', ['action' => 'clear']) ?></p> -->
 <h1> LADBS Gas Releseas </h1>
 <style>

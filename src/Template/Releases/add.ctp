@@ -9,7 +9,7 @@
     echo $this->Form->input('city');
     echo $this->Form->input('tract');
     echo $this->Form->input('lot');
-    echo $this->Form->date('rdate', ['label'=>'Release Date', 'minYear' => date('Y') - 5,]);
+    echo $this->Form->date('rdate', ['label'=>'Release Date', 'minYear' => date('Y') - 5,'required' => true, 'default' => date("'Y','d','m'") ]);
     echo $this->Form->input('inspector');
     echo "please include units here";
     echo $this->Form->input('note');

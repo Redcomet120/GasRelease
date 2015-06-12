@@ -188,6 +188,19 @@ if (Configure::read('debug')) {
     Plugin::load('DebugKit', ['bootstrap' => true]);
 }
 Plugin::load('CakePdf', array('bootstrap' => true, 'routes' => true));
+
+Configure::write('CakePdf', [
+    'engine' => 'CakePdf.DomPdf',
+    'margin' => [
+        'bottom' => 15,
+        'left' => 15,
+        'right' => 15,
+        'top' => 15
+    ],
+    'orientation' => 'protrait',
+    'download' => true,
+    'filename' => "Releases".date("m-d-Y")
+]);
 /**
  * Connect middleware/dispatcher filters.
  */

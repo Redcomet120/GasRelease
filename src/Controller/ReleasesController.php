@@ -2,6 +2,20 @@
 namespace App\Controller;
 use Cake\Network\Exception\NotFoundException;
 
+/*Configure Cakepdf
+Configure::write('CakePdf', [
+    'engine' => 'CakePdf.DomPdf',
+    'margin'=> [
+        'bottom' => 15,
+        'left' => 30,
+        'right'=> 30,
+        'top' => 25
+    ],
+    'orientation' => 'portrait',
+    'download' => true,
+    'filename' => 'Releases'.date(m-d-Y)
+]);*/
+
 class ReleasesController extends AppController
 {
     public function initialize()
@@ -29,7 +43,7 @@ class ReleasesController extends AppController
         if($this->request->is('post'))
         {
             $release = $this->Releases->patchEntity($release, $this->request->data);
-            if($this->Releases->Save($release))
+            if($this->Releases->save($release))
             {
                 $this->request->session()->write('Release',$this->flattenData($this->request->data));
                 $this->Flash->success(__('Your Release has been submitted'));
@@ -70,7 +84,7 @@ class ReleasesController extends AppController
         $query = $this->Releases
                 ->find()
                 ->select(['streetno','street','city','inspector','rdate'])
-                ->where([$searchtype.'='=> $search])
+                ->where([$searchtype.' =' => $search])
                 ->order(['created' => 'DESC']);
         foreach($query as $release)
         {
