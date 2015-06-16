@@ -2,6 +2,7 @@
 namespace App\Controller;
 use Cake\Network\Exception\NotFoundException;
 
+
 /*Configure Cakepdf
 Configure::write('CakePdf', [
     'engine' => 'CakePdf.DomPdf',
@@ -77,6 +78,9 @@ class ReleasesController extends AppController
         array_pop($data);
 //        $this->Flash->success(__(json_encode($data[1])));
         $this->set('data', $data);
+        $CakePdf = new \CakePdf\PDF\CakePdf();
+        $CakePdf->template('sesh','default');
+        $pdf = $Cakepdf->output();
     }
     public function clear()
 
