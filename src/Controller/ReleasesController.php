@@ -67,8 +67,16 @@ class ReleasesController extends AppController
     public function sesh()
     {
         $session = $this->request->session();
-        $split = explode("*",$session->read('Release'));
-        $this->Flash->success(__($split[9]));
+        $split = explode("!B@C0N!",$session->read('Release'));
+        $data = array();
+        foreach($split as $address)
+        {
+            $address = explode("*",$address);
+            $data[] = $address;
+        }
+        array_pop($data);
+//        $this->Flash->success(__(json_encode($data[1])));
+        $this->set('data', $data);
     }
     public function clear()
 

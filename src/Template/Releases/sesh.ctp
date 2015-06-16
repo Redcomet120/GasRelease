@@ -1,6 +1,6 @@
 <!-- File: src/Template/Releases/sesh.ctp-->
 <!--<p><?=$this->Html->link('Back Home', ['action' => 'clear']) ?></p> -->
-<h1> LADBS Gas Releseas </h1>
+<h1> LADBS Gas Releases </h1>
 <style>
     table, th, td {
         border: 1px solid black;
@@ -28,16 +28,26 @@
             <center>Phone: (818) 374-1101</center>
     </tr>
     </table>
-</div>
+    </div>
 <div id="releaseInfo">
     <table style="font-size: 14pt">
         <tr>
-            <th>Tract</th>
-            <th>Lot</th>
-            <th>Street#</th>
-            <th>Street Name</th>
-            <th>City</th>
-            <th>Notes</th>
+            <th width="10%">Tract</th>
+            <th width="10%">Lot</th>
+            <th width="10%">Street#</th>
+            <th width="20%">Street Name</th>
+            <th width="10%">City</th>
+            <th width="40%">Notes</th>
         </tr>
+<?php foreach($data as $address): ?>
+        <tr>
+        <td><?= $address[4] ?></td>
+        <td><?= $address[5] ?></td>
+        <td><?= $address[1] ?></td>
+        <td><?= $address[2] ?></td>
+        <td><?= $address[3] ?></td>
+        <td><?= $address[10]?></td>
+        </tr>
+<?php endforeach; ?>
     </table>
 </div>
