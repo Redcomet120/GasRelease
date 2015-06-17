@@ -81,11 +81,12 @@ class ReleasesController extends AppController
 //        $this->Flash->success(__(json_encode($data[1])));
         $this->set('data', $data);
         $CakePdf = new \CakePdf\Pdf\CakePdf();
+        $CakePdf->viewVars(array('data'=> $data));
         $CakePdf->template('sesh','default');
 //        $pdf = $CakePdf->output();
 //        $pdf = $CakePdf->viewRender();
         $pdf = $CakePdf->write(APP . 'files'. DS . 'releases.pdf');
-        print_r(APP . 'files' . DS . 'releases.pdf');
+//        print_r(APP . 'files' . DS . 'releases.pdf');
 
     }
     public function download()
