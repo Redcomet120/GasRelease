@@ -1,6 +1,6 @@
 # Gas Service Release Tracker
 
-A skeleton for creating applications with [CakePHP](http://cakephp.org) 3.0.
+This application was created using the [CakePHP](http://cakephp.org) 3.0. framework. This application was designed to track the release or approvals of services. the application will also generate a pdf document with the list of releases in the presently entered addresses.
 
 ## Installation
 
