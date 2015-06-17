@@ -6,7 +6,7 @@
 /tests/
 /plugins/
 /bin/
-/config/
+
 phpunit.xml.dist
 .travis.yml
 .editorconfig
@@ -14,3 +14,4 @@ phpunit.xml.dist
 .gitattributes
 composer.phar
 composer.lock
+!/config/bootstrap.php

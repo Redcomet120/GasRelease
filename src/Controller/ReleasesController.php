@@ -1,13 +1,30 @@
 <?php
 namespace App\Controller;
 use Cake\Network\Exception\NotFoundException;
+use Cake\Network\Response\File;
+
+/*Configure Cakepdf
+Configure::write('CakePdf', [
+    'engine' => 'CakePdf.DomPdf',
+    'margin'=> [
+        'bottom' => 15,
+        'left' => 30,
+        'right'=> 30,
+        'top' => 25
+    ],
+    'orientation' => 'portrait',
+    'download' => true,
+    'filename' => 'Releases'.date(m-d-Y)
+]);*/
 
 class ReleasesController extends AppController
 {
+//    public $components = array('RequestHandler');
     public function initialize()
     {
         parent::initialize();
         $this->loadComponent('Flash');
+    //    $this->loadComponent('RequestHandler');
     }
     public function index()
     {
@@ -29,7 +46,7 @@ class ReleasesController extends AppController
         if($this->request->is('post'))
         {
             $release = $this->Releases->patchEntity($release, $this->request->data);
-            if($this->Releases->Save($release))
+            if($this->Releases->save($release))
             {
                 $this->request->session()->write('Release',$this->flattenData($this->request->data));
                 $this->Flash->success(__('Your Release has been submitted'));
@@ -53,11 +70,31 @@ class ReleasesController extends AppController
     public function sesh()
     {
         $session = $this->request->session();
-        $split = explode("*",$session->read('Release'));
-        $this->Flash->success(__($split[9]));
+        $split = explode("!B@C0N!",$session->read('Release'));
+        $data = array();
+        foreach($split as $address)
+        {
+            $address = explode("*",$address);
+            $data[] = $address;
+        }
+        array_pop($data);
+//        $this->Flash->success(__(json_encode($data[1])));
+        $this->set('data', $data);
+        $CakePdf = new \CakePdf\Pdf\CakePdf();
+        $CakePdf->viewVars(array('data'=> $data));
+        $CakePdf->template('sesh','default');
+//        $pdf = $CakePdf->output();
+//        $pdf = $CakePdf->viewRender();
+        $pdf = $CakePdf->write(APP . 'files'. DS . 'releases.pdf');
+//        print_r(APP . 'files' . DS . 'releases.pdf');
+
+    }
+    public function download()
+    {
+        $this->response->file('files' . DS . 'releases.pdf', ['download' => true]);
+        return $this->response;
     }
     public function clear()
-
     {
         $this->request->session()->write('Release',' ');
         return $this->redirect(['action'=> 'index']);
@@ -70,7 +107,7 @@ class ReleasesController extends AppController
         $query = $this->Releases
                 ->find()
                 ->select(['streetno','street','city','inspector','rdate'])
-                ->where([$searchtype.'='=> $search])
+                ->where([$searchtype.' =' => $search])
                 ->order(['created' => 'DESC']);
         foreach($query as $release)
         {

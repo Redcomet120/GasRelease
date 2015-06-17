@@ -1,7 +1,5 @@
 <!-- File: src/Template/Releases/sesh.ctp-->
-<p><?=$this->Html->link('Back Home', ['action' => 'clear']) ?></p>
-<p><?=$this->Html->link('Download', ['action'=> 'download']);
-?></p>
+<!--<p><?=$this->Html->link('Back Home', ['action' => 'clear']) ?></p> -->
 <h1> LADBS Gas Releases </h1>
 <style>
     table, th, td {
