@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 use Cake\Network\Exception\NotFoundException;
-
+use Cake\Network\Response\File;
 
 /*Configure Cakepdf
 Configure::write('CakePdf', [
@@ -19,10 +19,12 @@ Configure::write('CakePdf', [
 
 class ReleasesController extends AppController
 {
+//    public $components = array('RequestHandler');
     public function initialize()
     {
         parent::initialize();
         $this->loadComponent('Flash');
+    //    $this->loadComponent('RequestHandler');
     }
     public function index()
     {
@@ -78,12 +80,20 @@ class ReleasesController extends AppController
         array_pop($data);
 //        $this->Flash->success(__(json_encode($data[1])));
         $this->set('data', $data);
-        $CakePdf = new \CakePdf\PDF\CakePdf();
+        $CakePdf = new \CakePdf\Pdf\CakePdf();
         $CakePdf->template('sesh','default');
-        $pdf = $Cakepdf->output();
+//        $pdf = $CakePdf->output();
+//        $pdf = $CakePdf->viewRender();
+        $pdf = $CakePdf->write(APP . 'files'. DS . 'releases.pdf');
+        print_r(APP . 'files' . DS . 'releases.pdf');
+
+    }
+    public function download()
+    {
+        $this->response->file('files' . DS . 'releases.pdf', ['download' => true]);
+        return $this->response;
     }
     public function clear()
-
     {
         $this->request->session()->write('Release',' ');
         return $this->redirect(['action'=> 'index']);

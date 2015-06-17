@@ -197,7 +197,7 @@ Configure::write('CakePdf', [
         'right' => 15,
         'top' => 15
     ],
-    'orientation' => 'protrait',
+    'orientation' => 'landscape',
     'download' => true,
     'filename' => "Releases".date("m-d-Y")
 ]);
