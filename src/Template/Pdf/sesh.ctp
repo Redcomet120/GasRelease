@@ -1,6 +1,6 @@
 <!-- File: src/Template/Releases/sesh.ctp-->
 <!--<p><?=$this->Html->link('Back Home', ['action' => 'clear']) ?></p> -->
-<h1> LADBS Gas Releases </h1>
+<h1> LADBS Gas Releases <?php echo date("m/d/Y");?></h1>
 <style>
     table, th, td {
         border: 1px solid black;

@@ -31,7 +31,7 @@
                     ->requirePresence('city')
                     ->notEmpty('city', 'A city or zip code is required')
                     ->add('city','validFormat',[
-                            'rule' =>array('custom','/^[a-z]*$/i'),
+                            'rule' =>array('custom','/^[a-z ]*$/i'),
                                 'message' => 'Letters and spaces only'
                         ])
                     ->requirePresence('tract')

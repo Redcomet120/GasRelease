@@ -1,13 +1,15 @@
 <!-- File: src/Template/Releases/index.ctp-->
 <h1> Gas Release Search Results</h1>
-<p><?= $this->Html->link('Add Release', ['action' => 'add']) ?></p>
+<p><?= $this->Html->link('Add Release', ['action' => 'add'],['class' => 'button']);?>
+   <?=  $this->Html->link('Logout', ['controller' => 'Users','action' => 'logout'],['class' => 'button']) ?></p>
+
 <?php
     echo date("m/d/Y");
     echo $this->Form->create('false', array('action' => 'search'));
     echo $this->Form->input('search');
     echo $this->Form->radio('searchtype',
         [
-            ['value' => 'streetno', 'text' => 'Street #'],
+            ['value' => 'streetno', 'text' => 'Street #', 'checked' => 'checked'],
             ['value' => 'street', 'text' => 'Street Name'],
         ]);
     echo $this->Form->button('Search');

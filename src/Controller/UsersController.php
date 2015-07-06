@@ -9,7 +9,26 @@
         public function beforeFilter(Event $event)
         {
             parent::beforeFilter($event);
-            $this->Auth->allow('add');
+            //uncomment this line to add initial user
+            //$this->Auth->allow('add');
+        }
+        public function isAuthorized($user)
+        {
+            if(in_array($this->request->action, ['edit', 'delete',' add']))
+            {
+                if(isset($user['role'])&& $user['role'] === 'admin')
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public function index()
@@ -25,12 +44,28 @@
                 $user = $this->Users->patchEntity($user, $this->request->data);
                 if($this->Users->save($user))
                 {
-                    $this->Flash->sucess(__('The user has been saved.'));
+                    $this->Flash->success(__('The user has been saved.'));
                     return $this->redirect(['action'=>'add']);
                 }
                 $this->Flash->error(__('Unable to add User.'));
             }
             $this->set('user', $user);
+        }
+
+        public function edit($id = null)
+        {
+            $usr = $this->Users->get($id);
+            if($this->request->is('post'))
+            {
+                $this->Users->patchEntity($usr, $this->request->data);
+                if($this->Users->save($usr))
+                {
+                    $this->Flash->success(__('User Updated'));
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__("Error: cannot update user"));
+            }
+            $this->set('user', $usr);
         }
 
         public function login()

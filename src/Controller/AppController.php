@@ -39,15 +39,25 @@ class AppController extends Controller
         parent::initialize();
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
+                'authorize' => ['Controller'],
                 'loginRedirect' => [
-                    'controller' => 'Releasess',
+                    'controller' => 'Releases',
                     'action' => 'index'
                 ],
                 'logoutRedirect' => [
-                    'controller' => 'Pages',
-                    'action' => 'display',
+                    'controller' => 'Users',
+                    'action' => 'login',
                     'home'
                 ]
-        ]);
+            ]);
     }
+    public function isAuthorized($user)
+    {
+        if(isset($user['role']))
+        {
+            return true;
+        }
+        return false;
+    }
+
 }

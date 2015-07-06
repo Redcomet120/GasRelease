@@ -1,8 +1,8 @@
-    <!-- src/Template/Users/add.ctp -->
+    <!-- src/Template/Users/edit.ctp -->
     <div class="users form">
 <?= $this->Form->create($user) ?>
     <fieldset>
-        <legend><?= __('Add User') ?></legend>
+        <legend><?= __('Edit  User') ?></legend>
         <?=$this->Form->input('username')?>
         <?=$this->Form->input('password')?>
         <?=$this->Form->input('role', [

@@ -2,7 +2,7 @@
 <p><?=$this->Html->link('Back Home', ['action' => 'clear']) ?></p>
 <p><?=$this->Html->link('Download', ['action'=> 'download']);
 ?></p>
-<h1> LADBS Gas Releases </h1>
+    <h1> LADBS Gas Releases </h1> <? echo date("m/d/Y");?>
 <style>
     table, th, td {
         border: 1px solid black;
